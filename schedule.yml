@@ -2,7 +2,7 @@ name: Daily Puppeteer Bot
 on:
   schedule:
     # This cron runs at 15:00 UTC every day (which is 22:00 Hanoi time)
-    - cron: '0 15 * * *'
+    - cron: '0 14 * * *'
   workflow_dispatch: # Allows you to trigger it manually for testing
 
 jobs:
