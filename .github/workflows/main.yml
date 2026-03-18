@@ -1,8 +1,7 @@
 name: Daily Puppeteer Bot
 on:
   schedule:
-   # - cron: '0 14 * * *'
-    - cron: '35 9 * * *'
+    - cron: '0 14 * * *'
   workflow_dispatch: # Allows you to trigger it manually for testing
 
 jobs:
