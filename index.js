@@ -99,16 +99,34 @@ const puppeteer = require('puppeteer');
         console.log("Checked 'Chọn tất cả'");
 
         // 2. Click Activate
-        await page.waitForSelector('svg[class="lucide lucide-zap"]', { visible: true });
-        await page.click('svg[class="lucide lucide-zap"]');
-        console.log("Clicked 'Kích hoạt trang'");
-        await new Promise (resolve => setTimeout(resolve,8000));
+       // 2. Click Activate (The Zap Icon)
+        console.log("Preparing to click 'Kích hoạt trang' (Zap icon)...");
+        const zapSelector = 'svg.lucide-zap'; // A cleaner way to write the CSS selector
+        
+        await page.waitForSelector(zapSelector, { visible: true });
+        
+        // FORCE CLICK using Javascript to avoid SVG ghost-clicks!
+        await page.evaluate((sel) => {
+            const svgElement = document.querySelector(sel);
+            // If the SVG is inside a button, click the button. Otherwise, click the SVG.
+            const parentButton = svgElement.closest('button');
+            if (parentButton) {
+                parentButton.click();
+            } else {
+                svgElement.click();
+            }
+        }, zapSelector);
+        
+        console.log("Clicked 'Kích hoạt trang' successfully!");
+
+        // Wait 1 second for the popup modal to finish its opening animation
+        await new Promise(resolve => setTimeout(resolve, 3000));
 
         // 3. Click Confirm
-        await page.waitForSelector('button::-p-text(Xác nhận)', { visible: true });
+        console.log("Waiting for 'Xác nhận' button...");
+        await page.waitForSelector('button::-p-text(Xác nhận)', { visible: true, timeout: 10000 });
         await page.click('button::-p-text(Xác nhận)');
         console.log("Clicked 'Xác nhận'");
-        await new Promise(resolve => setTimeout(resolve, 5000)); 
 
         // ---------------------------------------------------------
         // 4. CRITICAL STEP: Wait for the action to finish!
