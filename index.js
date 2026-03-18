@@ -10,7 +10,7 @@ const puppeteer = require('puppeteer');
         headless: true, 
         slowMo: 50,
         defaultViewport: null, // Opens browser in full size
-        args: [
+        args: ['--no-sandbox', '--disable-setuid-sandbox',
         '--disable-notifications' // This prevents the popup from ever appearing
     ]
     });
