@@ -58,9 +58,18 @@ const puppeteer = require('puppeteer');
     async function activatePagesMultipleTimes(page, numberOfTimes) {
     for (let i = 0; i < numberOfTimes; i++) {
         console.log(`--- Starting loop number ${i + 1} ---`);
-        // 1. Check the box
-        await page.waitForSelector('#select-all', { visible: true });
+        // 1. Check the box    
+    try {
+        console.log("Waiting for the select-all checkbox...");
+        await page.waitForSelector('#select-all', { timeout: 15000 }); // Wait 15 seconds max
         await page.click('#select-all');
+        console.log("Checked the box!");
+    } catch (error) {
+        console.log("ERROR: Could not find #select-all. Taking a screenshot to see what's wrong...");
+        // Take a picture of the screen and save it
+        await page.screenshot({ path: 'error-screenshot.png', fullPage: true });
+        throw error; // Stop the script
+    }
         console.log("Checked 'Chọn tất cả'");
 
         // 2. Click Activate
