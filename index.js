@@ -102,11 +102,13 @@ const puppeteer = require('puppeteer');
         await page.waitForSelector('svg[class="lucide lucide-zap"]', { visible: true });
         await page.click('svg[class="lucide lucide-zap"]');
         console.log("Clicked 'Kích hoạt trang'");
+        await new Promise (resolve => setTimeout(resolve,3000));
 
         // 3. Click Confirm
         await page.waitForSelector('button::-p-text(Xác nhận)', { visible: true });
         await page.click('button::-p-text(Xác nhận)');
         console.log("Clicked 'Xác nhận'");
+        await new Promise(resolve => setTimeout(resolve, 3000)); 
 
         // ---------------------------------------------------------
         // 4. CRITICAL STEP: Wait for the action to finish!
