@@ -7,7 +7,7 @@ const puppeteer = require('puppeteer');
     // headless: false means you can actually see the browser open and watch it work!
     // slowMo: 50 slows down the bot's typing/clicking by 50ms so you can see what it's doing.
     const browser = await puppeteer.launch({ 
-        headless: false, 
+        headless: true, 
         slowMo: 50,
         defaultViewport: null, // Opens browser in full size
         args: [
