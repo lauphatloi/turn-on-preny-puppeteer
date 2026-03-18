@@ -125,7 +125,8 @@ const puppeteer = require('puppeteer');
         // 3. Click Confirm
         console.log("Waiting for 'Xác nhận' button...");
         await page.waitForSelector('button::-p-text(Xác nhận)', { visible: true, timeout: 10000 });
-        await page.click('button::-p-text(Xác nhận)');
+        await confirmBtn.evaluate(btn => btn.click());
+        
         console.log("Clicked 'Xác nhận'");
 
         // ---------------------------------------------------------
