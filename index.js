@@ -51,8 +51,8 @@ const puppeteer = require('puppeteer');
     await page.click('a::-p-text(Tích hợp nền tảng)');
     console.log ("Have already clicked Tích hợp nền tảng")
     console.log ("Prepare to click Chờ kích hoạt");
-    await page.waitForSelector('a[href="https://app.preny.ai/quan-ly/tich-hop-nen-tang/cho-kich-hoat"]');
-    await page.click ('a[href="https://app.preny.ai/quan-ly/tich-hop-nen-tang/cho-kich-hoat"]');
+    await page.waitForSelector('a::-p-text(Chờ kích hoạt)');
+    await page.click ('a::-p-text(Chờ kích hoạt)');
     console.log ("Already clicked Chờ kích hoạt");
 
     async function activatePagesMultipleTimes(page, numberOfTimes) {
