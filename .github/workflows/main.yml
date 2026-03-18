@@ -1,0 +1,24 @@
+name: Daily Puppeteer Bot
+on:
+  schedule:
+    # This cron runs at 15:00 UTC every day (which is 22:00 Hanoi time)
+    - cron: '0 14 * * *'
+  workflow_dispatch: # Allows you to trigger it manually for testing
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Use your Node version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Puppeteer script
+        run: node index.js
