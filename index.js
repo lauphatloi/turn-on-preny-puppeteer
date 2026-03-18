@@ -50,20 +50,36 @@ const puppeteer = require('puppeteer');
     await page.waitForSelector('a::-p-text(Tích hợp nền tảng)');
     await page.click('a::-p-text(Tích hợp nền tảng)');
     console.log ("Have already clicked Tích hợp nền tảng")
+   console.log("Ready to click - Tích hợp nền tảng");
+    await page.waitForSelector('a::-p-text(Tích hợp nền tảng)', { visible: true });
+    await page.click('a::-p-text(Tích hợp nền tảng)');
+    console.log ("Have already clicked Tích hợp nền tảng");
+    await new Promise(resolve => setTimeout(resolve, 2000)); 
+
     console.log ("Prepare to click Chờ kích hoạt");
     const choKichHoatBtn = 'a[href="/quan-ly/tich-hop-nen-tang/cho-kich-hoat"]';
-    // Wait for the button
-    await page.waitForSelector(choKichHoatBtn);
+        try {
+        // Wait for the button, and ensure it is VISIBLE on screen (max 15 seconds)
+        await page.waitForSelector(choKichHoatBtn, { visible: true, timeout: 15000 });
+        
+        // FORCE CLICK using Javascript
+        await page.evaluate((selector) => {
+            document.querySelector(selector).click();
+        }, choKichHoatBtn);
+        
+        console.log("Already clicked Chờ kích hoạt");
+    } catch (error) {
+        console.log("ERROR: Could not find 'Chờ kích hoạt'. Taking screenshot...");
+        // Take a picture of the screen and save it to GitHub Artifacts
+        await page.screenshot({ path: 'error-screenshot.png', fullPage: true });
+        throw error; // Stop the script
+    }
     
-    // FORCE CLICK using Javascript (This bypasses animations and overlapping elements)
-    await page.evaluate((selector) => {
-        document.querySelector(selector).click();
-    }, choKichHoatBtn);
+    await new Promise(resolve => setTimeout(resolve, 3000));
     
     console.log("Already clicked Chờ kích hoạt");
     
-    // Now wait a moment to let the network fetch the table data
-    await new Promise(resolve => setTimeout(resolve, 3000)); // Wait 3 seconds
+    await new Promise(resolve => setTimeout(resolve, 3000)); 
 
     async function activatePagesMultipleTimes(page, numberOfTimes) {
     for (let i = 0; i < numberOfTimes; i++) {
