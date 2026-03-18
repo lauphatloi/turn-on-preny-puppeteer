@@ -51,9 +51,19 @@ const puppeteer = require('puppeteer');
     await page.click('a::-p-text(Tích hợp nền tảng)');
     console.log ("Have already clicked Tích hợp nền tảng")
     console.log ("Prepare to click Chờ kích hoạt");
-    await page.waitForSelector('a[href="/quan-ly/tich-hop-nen-tang/cho-kich-hoat"]');
-    await page.click ('a[href="/quan-ly/tich-hop-nen-tang/cho-kich-hoat"]');
-    console.log ("Already clicked Chờ kích hoạt");
+    const choKichHoatBtn = 'a[href="/quan-ly/tich-hop-nen-tang/cho-kich-hoat"]';
+    // Wait for the button
+    await page.waitForSelector(choKichHoatBtn);
+    
+    // FORCE CLICK using Javascript (This bypasses animations and overlapping elements)
+    await page.evaluate((selector) => {
+        document.querySelector(selector).click();
+    }, choKichHoatBtn);
+    
+    console.log("Already clicked Chờ kích hoạt");
+    
+    // Now wait a moment to let the network fetch the table data
+    await new Promise(resolve => setTimeout(resolve, 3000)); // Wait 3 seconds
 
     async function activatePagesMultipleTimes(page, numberOfTimes) {
     for (let i = 0; i < numberOfTimes; i++) {
