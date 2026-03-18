@@ -10,8 +10,9 @@ const puppeteer = require('puppeteer');
         headless: true, 
         slowMo: 50,
         defaultViewport: null, // Opens browser in full size
-        args: ['--no-sandbox', '--disable-setuid-sandbox',
-        '--disable-notifications' // This prevents the popup from ever appearing
+        args: ['--no-sandbox',
+               '--disable-setuid-sandbox',
+            '--disable-notifications' // This prevents the popup from ever appearing
     ]
     });
 
@@ -50,8 +51,8 @@ const puppeteer = require('puppeteer');
     await page.click('a::-p-text(Tích hợp nền tảng)');
     console.log ("Have already clicked Tích hợp nền tảng")
     console.log ("Prepare to click Chờ kích hoạt");
-    await page.waitForSelector('img[alt="Chờ kích hoạt"]');
-    await page.click ('img[alt="Chờ kích hoạt"]');
+    await page.waitForSelector('a[href="/quan-ly/tich-hop-nen-tang/cho-kich-hoat"]');
+    await page.click ('a[href="/quan-ly/tich-hop-nen-tang/cho-kich-hoat"]');
     console.log ("Already clicked Chờ kích hoạt");
 
     async function activatePagesMultipleTimes(page, numberOfTimes) {
