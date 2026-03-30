@@ -1,4 +1,4 @@
-name: Daily Puppeteer Bot
+name: Turn On Bot
 on:
   schedule:
     # This cron runs at 15:00 UTC every day (which is 22:00 Hanoi time)
@@ -21,4 +21,4 @@ jobs:
         run: npm install
 
       - name: Run Puppeteer script
-        run: node index.js
+        run: node turn_on.js
