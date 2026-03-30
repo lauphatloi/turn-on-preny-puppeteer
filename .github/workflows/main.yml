@@ -1,4 +1,4 @@
-name: Daily Puppeteer Bot
+name: Turn On Bot
 on:
   schedule:
     - cron: '0 14 * * *'
@@ -28,4 +28,4 @@ jobs:
         run: npx puppeteer browsers install chrome
         
       - name: Run Puppeteer script
-        run: node index.js
+        run: node turn_on.js
