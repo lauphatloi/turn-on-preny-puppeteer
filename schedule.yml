@@ -1,9 +1,8 @@
 name: Turn On Bot
 on:
   schedule:
-    # This cron runs at 15:00 UTC every day (which is 22:00 Hanoi time)
     - cron: '0 14 * * *'
-  workflow_dispatch: # Allows you to trigger it manually for testing
+  workflow_dispatch: 
 
 jobs:
   run-bot:
