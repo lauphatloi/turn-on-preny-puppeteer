@@ -1,7 +1,7 @@
 name: Turn On Bot
 on:
   schedule:
-    - cron: '0 16 * * *'
+    - cron: '0 15 * * *'
   workflow_dispatch: # Allows you to trigger it manually for testing
 
 jobs:
